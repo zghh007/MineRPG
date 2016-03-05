@@ -23,25 +23,30 @@ public class MineCore extends JavaPlugin implements Listener
 	@Override
 	public void onEnable()
 	{
+		//没有文件就存文件
 		File f = new File(getDataFolder(),"config.yml");
 		if(!f.exists())
 			/*==>*/{saveConfig();}
+		DamageManager dm = new DamageManager();
 		
 	}
 	
 	@EventHandler
 	public void evt(PlayerJoinEvent evt)
 	{
+		//取玩家名字
 		Player p = evt.getPlayer();
 		String name = "State_"+p.getName();
 		if(getConfig().contains(name))
 		{
+			//获取基础等级、属性
 			int level = getConfig().getInt(name);
 			int 攻=5+level;
 			int 防=5+level;
 			int 智=5+level;
 			int 敏=5+level;
 			int 幸=0;
+			//调用玩家背包
 			PlayerInventory pi = p.getInventory();
 			ItemMeta cloth = pi.getChestplate().getItemMeta();
 			ItemMeta hat = pi.getHelmet().getItemMeta();
@@ -49,6 +54,7 @@ public class MineCore extends JavaPlugin implements Listener
 			ItemMeta boot = pi.getBoots().getItemMeta();
 			ItemMeta Weapon = pi.getItemInHand().getItemMeta();
 			ItemMeta[] items = {cloth,hat,leg,boot,Weapon};
+			//获得玩家属性总值
 			for(ItemMeta i:items)
 			{
 				for(String s:i.getLore())
@@ -56,33 +62,33 @@ public class MineCore extends JavaPlugin implements Listener
 					char[] c = s.toCharArray();
 					if(c.length>=5)
 					{
-						if(s.startsWith("攻击 +"))
+						if(s.startsWith("§2攻击 +"))
 						{
-							s.replace("攻击 +","");
+							s.replace("§2攻击 +","");
 							int in = Integer.valueOf(s);
 							攻+=in;
 						}
-						if(s.startsWith("防御 +"))
+						if(s.startsWith("§2防御 +"))
 						{
-							s.replace("防御 +","");
+							s.replace("§2防御 +","");
 							int in = Integer.valueOf(s);
 							防+=in;
 						}
-						if(s.startsWith("智慧 +"))
+						if(s.startsWith("§2智慧 +"))
 						{
-							s.replace("智慧 +","");
+							s.replace("§2智慧 +","");
 							int in = Integer.valueOf(s);
 							智+=in;
 						}
-						if(s.startsWith("敏捷 +"))
+						if(s.startsWith("§2敏捷 +"))
 						{
-							s.replace("敏捷 +","");
+							s.replace("§2敏捷 +","");
 							int in = Integer.valueOf(s);
 							敏+=in;
 						}
-						if(s.startsWith("幸运 +"))
+						if(s.startsWith("§2幸运 +"))
 						{
-							s.replace("幸运 +","");
+							s.replace("§2幸运 +","");
 							int in = Integer.valueOf(s);
 							幸+=in;
 						}
@@ -101,7 +107,7 @@ public class MineCore extends JavaPlugin implements Listener
 			p.setMetadata("幸", luck);
 		}
 		else
-		{
+		{   //创建新RPG玩家
 			FixedMetadataValue atk = new FixedMetadataValue(this,5);
 			FixedMetadataValue def = new FixedMetadataValue(this,5);
 			FixedMetadataValue inT = new FixedMetadataValue(this,5);
@@ -132,8 +138,8 @@ public class MineCore extends JavaPlugin implements Listener
 			{
 				int time = DamageManager.nextDamageTime.get(name);
 				MetadataValue mv  = p.getMetadata("攻").get(0);
-				int d = mv.asInt()/5;
-				double damage = d*time;
+				double d = mv.asInt()/5;
+				double damage = d*time/100;
 				evt.setDamage(damage);
 				DamageManager.nextDamage.remove(name);
 				DamageManager.nextDamageTime.remove(name);

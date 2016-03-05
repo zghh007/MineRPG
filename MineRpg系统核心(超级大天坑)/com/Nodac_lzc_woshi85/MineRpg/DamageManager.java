@@ -2,23 +2,38 @@ package com.Nodac_lzc_woshi85.MineRpg;
 
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 public class DamageManager 
 {
+	public DamageManager DamageManager()
+	{
+		return this;
+	}
 	static HashMap<String,Integer> nextDamage=new HashMap<String,Integer>();
 	static HashMap<String,Integer> nextDamageTime=new HashMap<String,Integer>();
-	public SkillFailedCause setPlayerNextDamage(String p,int value,int mana)
+	public SkillFailedCause setPlayerNextDamage(String p,int value)
 	{
-		if(nextDamageTime.containsKey(p)|nextDamage.containsKey(p))
+		Player pl = Bukkit.getPlayer("p");
+		if(pl!=null&&pl.isOnline()==true)
 		{
-			return SkillFailedCause.HasUsed;	
+			if(nextDamageTime.containsKey(p)|nextDamage.containsKey(p))
+			{
+				return SkillFailedCause.HasUsed;	
+			}
+			else
+			{
+				nextDamage.put(p, value);
+				return SkillFailedCause.Successful;
+			}
 		}
 		else
 		{
-			nextDamage.put(p, value);
-			return SkillFailedCause.Successful;
+			return SkillFailedCause.PlayerNotFound;
 		}
 	}
-	public SkillFailedCause setPlayerNextDamageTime(String p,int value,int mana)
+	public SkillFailedCause setPlayerNextDamageTime(String p,int value)
 	{
 		if(nextDamageTime.containsKey(p)|nextDamage.containsKey(p))
 		{
