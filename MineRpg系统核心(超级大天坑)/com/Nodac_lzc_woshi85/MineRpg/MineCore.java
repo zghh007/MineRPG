@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 //玩家Config：P_玩家名
 //①:等级
@@ -128,9 +129,11 @@ public class MineCore extends JavaPlugin implements Listener
 				DamageManager.nextDamageTime.remove(name);
 			}
 			if(DamageManager.nextDamageTime.containsKey(name))
-			{//五属性未添加
+			{
 				int time = DamageManager.nextDamageTime.get(name);
-				double damage = evt.getDamage()*time;
+				MetadataValue mv  = p.getMetadata("攻").get(0);
+				int d = mv.asInt()/5;
+				double damage = d*time;
 				evt.setDamage(damage);
 				DamageManager.nextDamage.remove(name);
 				DamageManager.nextDamageTime.remove(name);
