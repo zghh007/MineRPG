@@ -2,6 +2,7 @@ package com.Nodac_lzc_woshi85.MineRpg;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlayerStateManager 
 {
@@ -67,6 +68,20 @@ public class PlayerStateManager
 		if(pl!=null&&pl.isOnline())
 		{
 			int Int = pl.getMetadata("幸").get(0).asInt();
+			return Int;
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	public int getLevel(String p)
+	{
+		JavaPlugin j = JavaPlugin.getPlugin(MineCore.class);
+		String name = "State_"+p;
+		if(j.getConfig().contains(name))
+		{
+			int Int = j.getConfig().getInt(name);
 			return Int;
 		}
 		else

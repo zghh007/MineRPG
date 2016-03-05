@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -160,12 +162,22 @@ public class MineCore extends JavaPlugin implements Listener
 			evt.setDamage(d);
 		}
 	}
-	public PlayerStateManager getPlayerStateManager()
+	public static PlayerStateManager getPlayerStateManager()
 	{
 		return new PlayerStateManager();
 	}
-	public DamageManager getDamageManager()
+	public static DamageManager getDamageManager()
 	{
 		return new DamageManager();
+	}
+	@EventHandler
+	public void evt3(InventoryEvent evt)
+	{
+		if(evt.getView().getType()==InventoryType.PLAYER)
+		{
+			PlayerInventory i = ((PlayerInventory)evt.getInventory());
+			
+		}
+		
 	}
 }
