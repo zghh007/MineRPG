@@ -125,6 +125,7 @@ public class MineCore extends JavaPlugin implements Listener
 	@EventHandler
 	public void evt2(EntityDamageByEntityEvent evt)
 	{
+		//当玩家攻击其他生物，设置扣血量
 		if(evt.getDamager().getType()==EntityType.PLAYER)
 		{
 			Player p = (Player)evt.getDamager();
@@ -148,6 +149,7 @@ public class MineCore extends JavaPlugin implements Listener
 			}
 		}
 		////////////////////////////////////////////////////////////////
+		//当玩家被其他生物攻击
 		if(evt.getEntity().getType()==EntityType.PLAYER)
 		{
 			Player p = (Player)evt.getEntity();
@@ -158,5 +160,12 @@ public class MineCore extends JavaPlugin implements Listener
 			evt.setDamage(d);
 		}
 	}
-
+	public PlayerStateManager getPlayerStateManager()
+	{
+		return new PlayerStateManager();
+	}
+	public DamageManager getDamageManager()
+	{
+		return new DamageManager();
+	}
 }
