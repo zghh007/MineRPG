@@ -42,7 +42,7 @@ public class MineCore extends JavaPlugin implements Listener
 			//获取基础等级、属性
 			int level = getConfig().getInt(name);
 			int 攻=5+level;
-			int 防=5+level;
+			double 防=1+0.1*level;
 			int 智=5+level;
 			int 敏=5+level;
 			int 幸=0;
@@ -105,14 +105,15 @@ public class MineCore extends JavaPlugin implements Listener
 			p.setMetadata("智", inT);
 			p.setMetadata("敏", spe);
 			p.setMetadata("幸", luck);
+			p.setWalkSpeed(敏/5);
 		}
 		else
 		{   //创建新RPG玩家
 			FixedMetadataValue atk = new FixedMetadataValue(this,5);
-			FixedMetadataValue def = new FixedMetadataValue(this,5);
+			FixedMetadataValue def = new FixedMetadataValue(this,1);
 			FixedMetadataValue inT = new FixedMetadataValue(this,5);
 			FixedMetadataValue spe = new FixedMetadataValue(this,5);
-			FixedMetadataValue luck = new FixedMetadataValue(this,5);
+			FixedMetadataValue luck = new FixedMetadataValue(this,0);
 			p.setMetadata("攻", atk);
 			p.setMetadata("防", def);
 			p.setMetadata("智", inT);
@@ -137,13 +138,25 @@ public class MineCore extends JavaPlugin implements Listener
 			if(DamageManager.nextDamageTime.containsKey(name))
 			{
 				int time = DamageManager.nextDamageTime.get(name);
-				MetadataValue mv  = p.getMetadata("攻").get(0);
-				double d = mv.asInt()/5;
+				PlayerStateManager ps = new PlayerStateManager();
+				double atk = ps.getATK(p.getName());
+				double d = atk/5;
 				double damage = d*time/100;
 				evt.setDamage(damage);
 				DamageManager.nextDamage.remove(name);
 				DamageManager.nextDamageTime.remove(name);
 			}
 		}
+		////////////////////////////////////////////////////////////////
+		if(evt.getEntity().getType()==EntityType.PLAYER)
+		{
+			Player p = (Player)evt.getEntity();
+			PlayerStateManager ps = new PlayerStateManager();
+			double def = ps.getDEF(p.getName());
+			double d = evt.getDamage()*(1-(def/100));
+			if(d<0)d=0;
+			evt.setDamage(d);
+		}
 	}
+
 }

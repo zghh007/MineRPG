@@ -35,12 +35,12 @@ public class PlayerStateManager
 		return 0;
 		}
 	}
-	public int getDEF(String p)
+	public double getDEF(String p)
 	{
 		Player pl = Bukkit.getPlayer(p);
 		if(pl!=null&&pl.isOnline())
 		{
-			int Int = pl.getMetadata("防").get(0).asInt();
+			double Int = pl.getMetadata("防").get(0).asInt();
 			return Int;
 		}
 		else
