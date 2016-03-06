@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 //玩家Config：P_玩家名
 //①:等级
 //②:额外属性List:{1攻2防3智4敏5幸}
@@ -162,13 +163,17 @@ public class MineCore extends JavaPlugin implements Listener
 			evt.setDamage(d);
 		}
 	}
-	public static PlayerStateManager getPlayerStateManager()
+	public /*static*/ PlayerStateManager getPlayerStateManager()
 	{
+
 		return new PlayerStateManager();
 	}
 	public static DamageManager getDamageManager()
 	{
+		
+		
 		return new DamageManager();
+
 	}
 	@EventHandler
 	public void evt3(InventoryEvent evt)
@@ -176,8 +181,9 @@ public class MineCore extends JavaPlugin implements Listener
 		if(evt.getView().getType()==InventoryType.PLAYER)
 		{
 			PlayerInventory i = ((PlayerInventory)evt.getInventory());
-			
+			ChestInventory ci = ((ChestInventory)evt.getInventory());
 		}
 		
 	}
+
 }
