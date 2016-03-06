@@ -181,7 +181,7 @@ public class MineCore extends JavaPlugin implements Listener
 		if(evt.getView().getType()==InventoryType.PLAYER)
 		{
 			PlayerInventory i = ((PlayerInventory)evt.getInventory());
-			ChestInventory ci = ((ChestInventory)evt.getInventory());
+			
 		}
 		
 	}
