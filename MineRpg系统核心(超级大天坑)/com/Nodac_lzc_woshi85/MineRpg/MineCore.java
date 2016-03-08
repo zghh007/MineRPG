@@ -7,8 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -23,6 +25,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 //③:职业1~8/9散人
 public class MineCore extends JavaPlugin implements Listener 
 {
+	DamageManager D = new DamageManager();
+	PlayerStateManager P = new PlayerStateManager();
+	ConfigManager Exp = new ConfigManager("exp");
 	@Override
 	public void onEnable()
 	{
@@ -30,7 +35,7 @@ public class MineCore extends JavaPlugin implements Listener
 		File f = new File(getDataFolder(),"config.yml");
 		if(!f.exists())
 			/*==>*/{saveConfig();}
-		DamageManager dm = new DamageManager();
+		
 		
 	}
 	
@@ -42,6 +47,11 @@ public class MineCore extends JavaPlugin implements Listener
 		String name = "State_"+p.getName();
 		if(getConfig().contains(name))
 		{
+			p.removeMetadata("攻",this);
+			p.removeMetadata("防",this);
+			p.removeMetadata("智",this);
+			p.removeMetadata("敏",this);
+			p.removeMetadata("幸",this);
 			//获取基础等级、属性
 			int level = getConfig().getInt(name);
 			int 攻=5+level;
@@ -133,22 +143,21 @@ public class MineCore extends JavaPlugin implements Listener
 		{
 			Player p = (Player)evt.getDamager();
 			String name = p.getName();
-			if(DamageManager.nextDamage.containsKey(name))
+			if(D.nextDamage.containsKey(name))
 			{
-				evt.setDamage(DamageManager.nextDamage.get(name));
-				DamageManager.nextDamage.remove(name);
-				DamageManager.nextDamageTime.remove(name);
+				evt.setDamage(D.nextDamage.get(name));
+				D.nextDamage.remove(name);
+				D.nextDamageTime.remove(name);
 			}
-			if(DamageManager.nextDamageTime.containsKey(name))
+			if(D.nextDamageTime.containsKey(name))
 			{
-				int time = DamageManager.nextDamageTime.get(name);
-				PlayerStateManager ps = new PlayerStateManager();
-				double atk = ps.getATK(p.getName());
+				int time = D.nextDamageTime.get(name);
+				double atk = P.getATK(p.getName());
 				double d = atk/5;
 				double damage = d*time/100;
 				evt.setDamage(damage);
-				DamageManager.nextDamage.remove(name);
-				DamageManager.nextDamageTime.remove(name);
+				D.nextDamage.remove(name);
+				D.nextDamageTime.remove(name);
 			}
 		}
 		////////////////////////////////////////////////////////////////
@@ -156,8 +165,7 @@ public class MineCore extends JavaPlugin implements Listener
 		if(evt.getEntity().getType()==EntityType.PLAYER)
 		{
 			Player p = (Player)evt.getEntity();
-			PlayerStateManager ps = new PlayerStateManager();
-			double def = ps.getDEF(p.getName());
+			double def = P.getDEF(p.getName());
 			double d = evt.getDamage()*(1-(def/100));
 			if(d<0)d=0;
 			evt.setDamage(d);
@@ -166,21 +174,27 @@ public class MineCore extends JavaPlugin implements Listener
 	public /*static*/ PlayerStateManager getPlayerStateManager()
 	{
 
-		return new PlayerStateManager();
+		return P;
 	}
-	public static DamageManager getDamageManager()
+	public DamageManager getDamageManager()
 	{
 		
 		
-		return new DamageManager();
+		return D;
 
 	}
 	@EventHandler
-	public void evt3(InventoryEvent evt)
+	public void evt3(InventoryClickEvent evt)
 	{
 		if(evt.getView().getType()==InventoryType.PLAYER)
 		{
 			PlayerInventory i = ((PlayerInventory)evt.getInventory());
+			SlotType s = evt.getSlotType();
+			SlotType st = InventoryType.SlotType.ARMOR;
+			if(s == st)
+			{
+				P.refreshPlayer(i.getHolder().getName());
+			}
 			
 		}
 		

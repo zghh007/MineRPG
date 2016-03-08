@@ -11,8 +11,8 @@ public class DamageManager
 	{
 		return this;
 	}
-	static HashMap<String,Integer> nextDamage=new HashMap<String,Integer>();
-	static HashMap<String,Integer> nextDamageTime=new HashMap<String,Integer>();
+	HashMap<String,Integer> nextDamage=new HashMap<String,Integer>();
+	HashMap<String,Integer> nextDamageTime=new HashMap<String,Integer>();
 	public SkillFailedCause setPlayerNextDamage(String p,int value)
 	{
 		Player pl = Bukkit.getPlayer("p");

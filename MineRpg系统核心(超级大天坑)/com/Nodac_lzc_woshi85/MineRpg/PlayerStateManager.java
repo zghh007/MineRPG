@@ -190,6 +190,11 @@ public class PlayerStateManager
 		FixedMetadataValue inT = new FixedMetadataValue(j,智);
 		FixedMetadataValue spe = new FixedMetadataValue(j,敏);
 		FixedMetadataValue luck = new FixedMetadataValue(j,幸);
+		pl.removeMetadata("攻",j);
+		pl.removeMetadata("防",j);
+		pl.removeMetadata("智",j);
+		pl.removeMetadata("敏",j);
+		pl.removeMetadata("幸",j);
 		pl.setMetadata("攻", atk);
 		pl.setMetadata("防", def);
 		pl.setMetadata("智", inT);
