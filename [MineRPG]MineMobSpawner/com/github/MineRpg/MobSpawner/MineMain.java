@@ -1,4 +1,4 @@
-package com.Nodak_lzc_woshi85.MineRpg.MobSpawner;
+package com.github.MineRpg.MobSpawner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.Nodak_lzc_woshi85.MineRpg.MobSpawner.Spawner.CustomMobSpawner;
-import com.Nodak_lzc_woshi85.MineRpg.MobSpawner.Spawner.MonsterSpawner;
+import com.github.MineRpg.MobSpawner.Spawner.CustomMobSpawner;
+import com.github.MineRpg.MobSpawner.Spawner.MonsterSpawner;
 
 public class MineMain extends JavaPlugin {
 	public List<MonsterSpawner> aSpawners = new ArrayList<MonsterSpawner>();

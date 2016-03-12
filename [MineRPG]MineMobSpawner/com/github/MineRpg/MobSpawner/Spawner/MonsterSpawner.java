@@ -1,4 +1,4 @@
-package com.Nodak_lzc_woshi85.MineRpg.MobSpawner.Spawner;
+package com.github.MineRpg.MobSpawner.Spawner;
 
 import java.util.Date;
 
@@ -7,8 +7,8 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.Nodak_lzc_woshi85.MineRpg.MobSpawner.EntityMineType;
-import com.Nodak_lzc_woshi85.MineRpg.MobSpawner.MineMain;
+import com.github.MineRpg.MobSpawner.EntityMineType;
+import com.github.MineRpg.MobSpawner.MineMain;
 
 public class MonsterSpawner implements CustomMobSpawner {
 

@@ -1,4 +1,4 @@
-package com.Nodak_lzc_woshi85.MineRpg.MobSpawner;
+package com.github.MineRpg.MobSpawner;
 
 public enum EntityMineType 
 {

@@ -1,4 +1,4 @@
-package com.Nodak_lzc_woshi85.MineRpg.MobSpawner.Spawner;
+package com.github.MineRpg.MobSpawner.Spawner;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.Nodak_lzc_woshi85.MineRpg.MobSpawner.EntityMineType;
+import com.github.MineRpg.MobSpawner.EntityMineType;
 
 public interface CustomMobSpawner {
 	public Location getLocation();

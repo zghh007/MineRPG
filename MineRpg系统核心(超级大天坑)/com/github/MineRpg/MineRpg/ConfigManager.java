@@ -1,4 +1,4 @@
-package com.Nodak_lzc_woshi85.MineRpg;
+package com.github.MineRpg.MineRpg;
 
 import java.io.File;
 import java.io.IOException;

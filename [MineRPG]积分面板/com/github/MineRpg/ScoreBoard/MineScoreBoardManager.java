@@ -1,4 +1,4 @@
-package com.Nodak_lzc_woshi85.MineRpg.ScoreBoard;
+package com.github.MineRpg.ScoreBoard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -7,7 +7,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-import com.Nodak_lzc_woshi85.MineRpg.MineCore;
+import com.github.MineRpg.MineRpg.MineCore;
 
 public class MineScoreBoardManager 
 {
