@@ -25,12 +25,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 //③:职业1~8/9散人
 public class MineCore extends JavaPlugin implements Listener 
 {
-	DamageManager D = new DamageManager();
-	PlayerStateManager P = new PlayerStateManager();
-	ConfigManager Exp = new ConfigManager("exp");
+	private DamageManager D = new DamageManager();
+	private PlayerStateManager P = new PlayerStateManager();
+	private ConfigManager Exp = new ConfigManager("exp");
 	@Override
 	public void onEnable()
 	{
+		
 		//没有文件就存文件
 		File f = new File(getDataFolder(),"config.yml");
 		if(!f.exists())
@@ -198,6 +199,10 @@ public class MineCore extends JavaPlugin implements Listener
 			
 		}
 		
+	}
+	public ConfigManager getMineConfig(String s)
+	{
+		return new ConfigManager(s);
 	}
 
 }

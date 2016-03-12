@@ -9,9 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConfigManager 
 {
-	MineCore j = JavaPlugin.getPlugin(MineCore.class);
-	File f ;
-	YamlConfiguration y; 
+	private MineCore j = JavaPlugin.getPlugin(MineCore.class);
+	private File f ;
+	private YamlConfiguration y; 
 	public ConfigManager(String name)
 	{
 		f = new File(j.getDataFolder(),name+".yml");

@@ -2,15 +2,19 @@ package com.Nodac_lzc_woshi85.MineRpg.ScoreBoard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
+import com.Nodac_lzc_woshi85.MineRpg.MineCore;
+
 public class MineScoreBoardManager 
 {
-	public MineScoreBoardManager MineScoreBoardManager()
+	static MineCore J = JavaPlugin.getPlugin(MineCore.class);
+	public MineScoreBoardManager()
 	{
-		return this;
+		return ;
 	}
 	
 	public void setScoreBoard(Player p)
@@ -24,8 +28,10 @@ public class MineScoreBoardManager
 			p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 		}
 		Scoreboard sb = p.getScoreboard();
-		Objective obj = sb.getObjective(DisplaySlot.SIDEBAR);
+		Objective obj = sb.registerNewObjective("MineState", "dummy");
 		obj.setDisplayName("&7&l&m [&b&l&m         &r&e&lwelcome to Our Server&b&l&m         ]&7&l&m ");
+		int ATK = J.getPlayerStateManager().getATK(p.getName());
+		obj.getScore("攻属性: "+ATK).setScore(0);
 		
 	}
 }

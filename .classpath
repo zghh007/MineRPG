@@ -3,6 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="src" path="MineRpg系统核心(超级大天坑)"/>
 	<classpathentry kind="src" path="[MineRPG]积分面板"/>
+	<classpathentry kind="src" path="[MineRPG]MineMobSpawner"/>
 	<classpathentry kind="lib" path="E:/Documents and Settings/Administrator/Local Settings/Application Data/spigot1.8服务端/spigot.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
