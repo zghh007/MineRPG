@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="MineRpg系统核心(超级大天坑)"/>
 	<classpathentry kind="src" path="[MineRPG]积分面板"/>
 	<classpathentry kind="src" path="[MineRPG]MineMobSpawner"/>
-	<classpathentry kind="lib" path="E:/Documents and Settings/Administrator/Local Settings/Application Data/spigot1.8服务端/spigot.jar"/>
+	<classpathentry kind="lib" path="F:/所有/plugin/spigot-1.8.6-R0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
